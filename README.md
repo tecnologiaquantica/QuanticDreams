@@ -3,12 +3,12 @@
 Site de divulgação científica sobre computação quântica, em português e inglês.
 Estático, sem build e sem dependências externas.
 
-**Repositório:** https://github.com/tecnologiaquantica/QuanicDreams
-**Endereço:** https://tecnologiaquantica.github.io/QuanicDreams/ — ative em
+**Repositório:** https://github.com/tecnologiaquantica/QuanticDreams
+**Endereço:** https://tecnologiaquantica.github.io/QuanticDreams/ — ative em
 Settings → Pages → *Deploy from a branch* (`master`, `/ (root)`).
 
 O nome público do projeto é **quanticdreams**; o repositório no GitHub usa
-`QuanicDreams`, sem o `t`.
+`QuanticDreams`.
 
 ## Estrutura
 
@@ -70,13 +70,13 @@ O repositório publica a branch `master`, na raiz, sem ação de build.
 
 1. Settings → Pages → Source: *Deploy from a branch*.
 2. Branch: `master`, pasta `/ (root)`.
-3. Salvar. O endereço fica `https://<org>.github.io/QuanicDreams/` enquanto o
+3. Salvar. O endereço fica `https://<org>.github.io/QuanticDreams/` enquanto o
    repositório mantiver esse nome.
 
 O arquivo `.nojekyll` evita que o Jekyll ignore pastas iniciadas por `_`.
 
 Os caminhos absolutos em `404.html`, `canonical` e `og:image` incluem
-`/QuanicDreams/`. Se o repositório for renomeado, atualize esses três pontos
+`/QuanticDreams/`. Se o repositório for renomeado, atualize esses três pontos
 e o link do rodapé.
 
 ## Editar
