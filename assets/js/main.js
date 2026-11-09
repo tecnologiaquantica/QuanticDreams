@@ -20,6 +20,12 @@
     return value === "en" ? "en" : "pt";
   }
 
+  function menuText(open) {
+    var en = root.getAttribute("data-lang") === "en";
+    if (open) return en ? "Close menu" : "Fechar menu";
+    return en ? "Open menu" : "Abrir menu";
+  }
+
   function applyLang(lang, persist) {
     var l = normalize(lang);
     root.setAttribute("data-lang", l);
@@ -29,6 +35,19 @@
     if (title) document.title = title;
 
     if (label) label.textContent = l === "pt" ? "EN" : "PT";
+
+    var navEl = document.getElementById("nav");
+    var menuEl = document.getElementById("menu-toggle");
+    if (navEl) {
+      navEl.setAttribute(
+        "aria-label",
+        l === "en" ? "Main navigation" : "Navegação principal"
+      );
+    }
+    if (menuEl) {
+      var openNow = navEl && navEl.classList.contains("is-open");
+      menuEl.setAttribute("aria-label", menuText(!!openNow));
+    }
     if (toggle) {
       toggle.setAttribute(
         "aria-label",
@@ -76,17 +95,14 @@
     if (!nav || !menu) return;
     nav.classList.remove("is-open");
     menu.setAttribute("aria-expanded", "false");
-    menu.setAttribute("aria-label", "Abrir menu");
+    menu.setAttribute("aria-label", menuText(false));
   }
 
   if (menu && nav) {
     menu.addEventListener("click", function () {
       var open = nav.classList.toggle("is-open");
       menu.setAttribute("aria-expanded", open ? "true" : "false");
-      menu.setAttribute(
-        "aria-label",
-        open ? "Fechar menu" : "Abrir menu"
-      );
+      menu.setAttribute("aria-label", menuText(open));
     });
 
     nav.addEventListener("click", function (event) {

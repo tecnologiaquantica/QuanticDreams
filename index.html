@@ -38,7 +38,7 @@
 
   <header class="site-header" id="topo">
     <div class="header-inner">
-      <a class="brand" href="#inicio" aria-label="quanticdreams — início">
+      <a class="brand" href="#inicio">
         <span class="brand-mark" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
             <circle cx="12" cy="12" r="3.2" fill="currentColor" stroke="none"/>
@@ -128,8 +128,8 @@
         <div class="split">
           <div class="reveal">
             <p class="definition">
-              <span class="lang-pt">Um computador quântico usa <em>estados quânticos da matéria</em> — superposição, emaranhamento e interferência — para executar um conjunto restrito de cálculos que um computador clássico não consegue reproduzir em tempo viável.</span>
-              <span class="lang-en">A quantum computer uses <em>quantum states of matter</em> — superposition, entanglement and interference — to run a narrow set of calculations that a classical computer cannot reproduce in feasible time.</span>
+              <span class="lang-pt">Um computador quântico usa <em>estados quânticos da matéria</em> — superposição, emaranhamento e interferência — para executar um conjunto restrito de cálculos para os quais não se conhece algoritmo clássico eficiente.</span>
+              <span class="lang-en">A quantum computer uses <em>quantum states of matter</em> — superposition, entanglement and interference — to run a narrow set of calculations for which no efficient classical algorithm is known.</span>
             </p>
             <p style="margin-top:24px;">
               <span class="lang-pt">Fora desse conjunto, ele não é melhor. Em muitos problemas comuns, é pior: mais lento, mais caro e mais frágil. A vantagem não vem da velocidade bruta de cada operação, e sim de como as amplitudes de probabilidade se combinam antes da medição.</span>
@@ -146,8 +146,8 @@
                 <span style="font-size:.72em;color:var(--dim);">|α|² + |β|² = 1</span>
               </div>
               <p style="margin-top:16px;">
-                <span class="lang-pt">Ao medir, o resultado é 0 com probabilidade |α|² e 1 com probabilidade |β|². Antes da medição não existe um valor escondido: existe um estado.</span>
-                <span class="lang-en">On measurement, the result is 0 with probability |α|² and 1 with probability |β|². Before measurement there is no hidden value: there is a state.</span>
+                <span class="lang-pt">Ao medir, o resultado é 0 com probabilidade |α|² e 1 com probabilidade |β|². Antes da medição, o formalismo não atribui um valor definido: existe um estado.</span>
+                <span class="lang-en">On measurement, the result is 0 with probability |α|² and 1 with probability |β|². Before measurement, the formalism assigns no definite value: there is a state.</span>
               </p>
             </div>
           </div>
@@ -182,8 +182,8 @@
             </div>
             <h3><span class="lang-pt">Emaranhamento</span><span class="lang-en">Entanglement</span></h3>
             <p>
-              <span class="lang-pt">Dois qubits podem formar um estado conjunto que não pode ser descrito separadamente. Medir um determina o resultado do outro — mas isso não transmite informação mais rápido que a luz.</span>
-              <span class="lang-en">Two qubits can form a joint state that cannot be described separately. Measuring one determines the other's result — but that does not transmit information faster than light.</span>
+              <span class="lang-pt">Dois qubits podem formar um estado conjunto que não pode ser descrito separadamente. Em um par maximamente emaranhado, medir um qubit na mesma base determina o resultado do outro — mas isso não transmite informação mais rápido que a luz.</span>
+              <span class="lang-en">Two qubits can form a joint state that cannot be described separately. In a maximally entangled pair, measuring one qubit in the same basis determines the other's result — but that does not transmit information faster than light.</span>
             </p>
           </article>
 
@@ -241,8 +241,8 @@
             <span class="num">01</span>
             <h3><span class="lang-pt">Decoerência</span><span class="lang-en">Decoherence</span></h3>
             <p>
-              <span class="lang-pt">Qualquer interação com o ambiente apaga a informação quântica. Por isso os dispositivos ficam em refrigeradores de diluição, com temperaturas da ordem de 10 mK — mais frios que o espaço aberto.</span>
-              <span class="lang-en">Any interaction with the environment erases quantum information. That is why devices sit in dilution refrigerators at temperatures on the order of 10 mK — colder than open space.</span>
+              <span class="lang-pt">O acoplamento com o ambiente apaga a informação quântica: o estado vaza para graus de liberdade externos e vira mistura. Para reduzir esse efeito, muitos dispositivos usam refrigeradores de diluição com temperaturas da ordem de 10 mK — mais frios que o espaço aberto. Não é regra universal: há arquiteturas que operam em outras faixas.</span>
+              <span class="lang-en">Coupling to the environment erases quantum information: the state leaks into external degrees of freedom and becomes a mixture. To reduce that effect, many devices use dilution refrigerators at temperatures on the order of 10 mK — colder than open space. This is not universal: some architectures operate in other ranges.</span>
             </p>
           </div>
           <div class="difficulty">
@@ -257,8 +257,8 @@
             <span class="num">03</span>
             <h3><span class="lang-pt">Correção de erros</span><span class="lang-en">Error correction</span></h3>
             <p>
-              <span class="lang-pt">Um qubit lógico — o que realmente calcula — exige muitos qubits físicos de reserva. Códigos de superfície funcionam, mas o custo por qubit lógico ainda é alto demais para aplicações gerais.</span>
-              <span class="lang-en">One logical qubit — the one that actually computes — requires many physical qubits in reserve. Surface codes work, but the cost per logical qubit is still too high for general applications.</span>
+              <span class="lang-pt">Um qubit lógico — o que realmente calcula — exige muitos qubits físicos, todos dedicados a codificar um único estado lógico. Códigos de superfície funcionam, mas o custo por qubit lógico ainda é alto demais para aplicações gerais.</span>
+              <span class="lang-en">One logical qubit — the one that actually computes — requires many physical qubits, all dedicated to encoding a single logical state. Surface codes work, but the cost per logical qubit is still too high for general applications.</span>
             </p>
           </div>
           <div class="difficulty">
@@ -389,7 +389,7 @@
             <div class="tl-year">2019</div>
             <div class="tl-body">
               <h3><span class="lang-pt">Vantagem quântica em uma tarefa específica</span><span class="lang-en">Quantum advantage on a specific task</span></h3>
-              <p><span class="lang-pt">Um processador supercondutor resolve uma amostragem aleatória de circuitos mais rápido que um supercomputador. A tarefa não tem uso prático direto.</span><span class="lang-en">A superconducting processor solves random circuit sampling faster than a supercomputer. The task has no direct practical use.</span></p>
+              <p><span class="lang-pt">O Sycamore, do Google, foi anunciado como tendo resolvido uma amostragem aleatória de circuitos em minutos, contra milhares de anos estimados para um supercomputador. A alegação foi contestada: algoritmos clássicos posteriores reduziram bastante a diferença. A tarefa não tem uso prático direto.</span><span class="lang-en">Google's Sycamore was announced as solving random circuit sampling in minutes, versus an estimated thousands of years on a supercomputer. The claim was contested: later classical algorithms narrowed the gap substantially. The task has no direct practical use.</span></p>
             </div>
           </div>
           <div class="tl-item">

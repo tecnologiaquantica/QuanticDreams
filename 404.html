@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>404 — quanticdreams</title>
   <meta name="robots" content="noindex">
+  <script>
+    try {
+      if (localStorage.getItem("quanticdreams:lang") === "en") {
+        document.documentElement.setAttribute("data-lang", "en");
+        document.documentElement.setAttribute("lang", "en");
+      }
+    } catch (e) {}
+  </script>
   <link rel="stylesheet" href="/QuanicDreams/assets/css/style.css">
 </head>
 <body style="display:grid;place-items:center;min-height:100svh;text-align:center;">
