@@ -34,7 +34,6 @@
         "aria-label",
         l === "pt" ? "Mudar idioma para inglês" : "Switch language to Portuguese"
       );
-      toggle.setAttribute("aria-pressed", l === "en" ? "true" : "false");
     }
 
     if (persist) {

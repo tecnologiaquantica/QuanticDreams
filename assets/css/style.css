@@ -12,7 +12,7 @@
   --line-strong: rgba(255, 255, 255, 0.16);
   --text: #eceef8;
   --muted: #9aa2ba;
-  --dim: #6d748c;
+  --dim: #7b839c;
   --violet: #7c5cff;
   --violet-soft: rgba(124, 92, 255, 0.16);
   --cyan: #22d3ee;
@@ -1181,12 +1181,17 @@ td:first-child {
 /* reveal */
 
 .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+html.js .reveal {
   opacity: 0;
   transform: translateY(22px);
   transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
 }
 
-.reveal.is-visible {
+html.js .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
@@ -1240,12 +1245,14 @@ td:first-child {
     backdrop-filter: blur(18px);
     transform: translateY(-12px);
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
   }
 
   .site-nav.is-open {
     opacity: 1;
+    visibility: visible;
     transform: none;
     pointer-events: auto;
   }
@@ -1331,6 +1338,11 @@ td:first-child {
   }
 
   .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  html.js .reveal {
     opacity: 1;
     transform: none;
   }

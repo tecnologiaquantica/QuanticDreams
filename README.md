@@ -18,8 +18,10 @@ O nome público do projeto é **quanticdreams**; o repositório no GitHub usa
 ├── 404.html                # página de erro
 ├── assets/
 │   ├── css/style.css       # tema escuro, responsivo, print e reduced-motion
+│   ├── img/og.png          # imagem 1200×630 para compartilhamento
 │   └── js/main.js          # idioma, menu, canvas, revelação por scroll
 ├── .nojekyll               # desliga o processamento Jekyll no Pages
+├── robots.txt              # libera indexação
 └── README.md
 ```
 
@@ -42,7 +44,9 @@ html[data-lang="en"] .lang-pt { display: none !important; }
 ```
 
 O botão no cabeçalho troca `data-lang` e guarda a escolha em `localStorage`
-(chave `quanticdreams:lang`). Sem JavaScript, a página abre em português.
+(chave `quanticdreams:lang`). Sem JavaScript, a página abre em português e todo
+o conteúdo fica visível: a animação de revelação só é aplicada quando a classe
+`js` existe no `<html>`.
 
 Para adicionar conteúdo, escreva os dois blocos e use a mesma classe. Nunca
 deixe um idioma sem par: o layout reserva o espaço do texto traduzido.
