@@ -3,7 +3,8 @@
 Site de divulgação científica sobre computação quântica, em português e inglês.
 Estático, sem build e sem dependências externas.
 
-**No ar:** https://tecnologiaquantica.github.io/babybaby/
+**Endereço:** https://tecnologiaquantica.github.io/babybaby/ — ative em
+Settings → Pages → *Deploy from a branch* (`master`, `/ (root)`).
 
 ## Estrutura
 
