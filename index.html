@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-lang="pt" data-title-pt="Computação quântica, sem misticismo — babybaby" data-title-en="Quantum computing, without the mysticism — babybaby">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Computação quântica, sem misticismo — babybaby</title>
+  <meta name="description" content="Guia de divulgação científica sobre computação quântica: qubits, superposição, emaranhamento, limites reais e o que ainda é promessa.">
+  <meta name="theme-color" content="#05060e">
+  <meta name="color-scheme" content="dark">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Computação quântica, sem misticismo">
+  <meta property="og:description" content="O que é real, o que é promessa e por que qubits não são magia.">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:locale:alternate" content="en_US">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237c5cff'/%3E%3Cstop offset='1' stop-color='%2322d3ee'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%2305060e'/%3E%3Ccircle cx='32' cy='32' r='8' fill='url(%23g)'/%3E%3Cellipse cx='32' cy='32' rx='22' ry='9' fill='none' stroke='url(%23g)' stroke-width='2' transform='rotate(-28 32 32)'/%3E%3Cellipse cx='32' cy='32' rx='22' ry='9' fill='none' stroke='%23ffffff' stroke-opacity='.35' stroke-width='1.2' transform='rotate(38 32 32)'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/main.js" defer></script>
+</head>
+<body>
+
+  <a class="skip-link" href="#conteudo">
+    <span class="lang-pt">Ir para o conteúdo</span>
+    <span class="lang-en">Skip to content</span>
+  </a>
+
+  <canvas id="field" aria-hidden="true"></canvas>
+
+  <header class="site-header" id="topo">
+    <div class="header-inner">
+      <a class="brand" href="#inicio" aria-label="babybaby — início">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <circle cx="12" cy="12" r="3.2" fill="currentColor" stroke="none"/>
+            <ellipse cx="12" cy="12" rx="9" ry="3.8" transform="rotate(-28 12 12)"/>
+            <ellipse cx="12" cy="12" rx="9" ry="3.8" transform="rotate(38 12 12)"/>
+          </svg>
+        </span>
+        <span>babybaby<small>quantum notes</small></span>
+      </a>
+
+      <nav class="site-nav" id="nav" aria-label="Navegação principal">
+        <a href="#conceitos"><span class="lang-pt">Conceitos</span><span class="lang-en">Concepts</span></a>
+        <a href="#limites"><span class="lang-pt">Limites</span><span class="lang-en">Limits</span></a>
+        <a href="#aplicacoes"><span class="lang-pt">Aplicações</span><span class="lang-en">Applications</span></a>
+        <a href="#historia"><span class="lang-pt">História</span><span class="lang-en">History</span></a>
+        <a href="#mitos"><span class="lang-pt">Mitos</span><span class="lang-en">Myths</span></a>
+        <a href="#glossario"><span class="lang-pt">Glossário</span><span class="lang-en">Glossary</span></a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Mudar idioma para inglês">
+          <span class="dot" aria-hidden="true"></span>
+          <span id="lang-label">EN</span>
+        </button>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="inicio">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="lang-pt">Divulgação científica · física quântica</span>
+            <span class="lang-en">Science communication · quantum physics</span>
+          </p>
+
+          <h1>
+            <span class="lang-pt">Computação quântica,<br><span class="grad">sem misticismo.</span></span>
+            <span class="lang-en">Quantum computing,<br><span class="grad">without the mysticism.</span></span>
+          </h1>
+
+          <p class="hero-lead">
+            <span class="lang-pt">Qubits não são magia. São física difícil, engenharia mais difícil ainda e uma promessa real — desde que se separe o que já foi demonstrado do que ainda é hipótese.</span>
+            <span class="lang-en">Qubits are not magic. They are hard physics, harder engineering, and a real promise — as long as you separate what has been demonstrated from what is still a hypothesis.</span>
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#conceitos">
+              <span class="lang-pt">Começar pelo básico</span>
+              <span class="lang-en">Start with the basics</span>
+              <span aria-hidden="true">→</span>
+            </a>
+            <a class="btn btn-ghost" href="#mitos">
+              <span class="lang-pt">Ver o que é mito</span>
+              <span class="lang-en">See what is a myth</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="orbit"></div>
+          <div class="orbit"></div>
+          <div class="orbit"></div>
+          <div class="core"></div>
+          <span class="hero-note">|ψ⟩ = α|0⟩ + β|1⟩</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONCEITOS ================= -->
+    <section class="section" id="conceitos">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker"><span>01</span> <span class="lang-pt">O básico sem atalhos</span><span class="lang-en">The basics, no shortcuts</span></p>
+          <h2>
+            <span class="lang-pt">Não é um computador mais rápido. É outro modelo de computação.</span>
+            <span class="lang-en">It is not a faster computer. It is another model of computation.</span>
+          </h2>
+        </div>
+
+        <div class="split">
+          <div class="reveal">
+            <p class="definition">
+              <span class="lang-pt">Um computador quântico usa <em>estados quânticos da matéria</em> — superposição, emaranhamento e interferência — para executar um conjunto restrito de cálculos que um computador clássico não consegue reproduzir em tempo viável.</span>
+              <span class="lang-en">A quantum computer uses <em>quantum states of matter</em> — superposition, entanglement and interference — to run a narrow set of calculations that a classical computer cannot reproduce in feasible time.</span>
+            </p>
+            <p style="margin-top:24px;">
+              <span class="lang-pt">Fora desse conjunto, ele não é melhor. Em muitos problemas comuns, é pior: mais lento, mais caro e mais frágil. A vantagem não vem da velocidade bruta de cada operação, e sim de como as amplitudes de probabilidade se combinam antes da medição.</span>
+              <span class="lang-en">Outside that set, it is not better. On many ordinary problems it is worse: slower, costlier and more fragile. The advantage comes not from the raw speed of each operation, but from how probability amplitudes combine before measurement.</span>
+            </p>
+          </div>
+
+          <div class="reveal">
+            <div class="callout">
+              <h3><span class="lang-pt">A unidade</span><span class="lang-en">The unit</span></h3>
+              <div class="formula" aria-label="psi equals alpha zero plus beta one">
+                |ψ⟩ = <span class="amp">α</span>|0⟩ + <span class="amp">β</span>|1⟩
+                <br>
+                <span style="font-size:.72em;color:var(--dim);">|α|² + |β|² = 1</span>
+              </div>
+              <p style="margin-top:16px;">
+                <span class="lang-pt">Ao medir, o resultado é 0 com probabilidade |α|² e 1 com probabilidade |β|². Antes da medição não existe um valor escondido: existe um estado.</span>
+                <span class="lang-en">On measurement, the result is 0 with probability |α|² and 1 with probability |β|². Before measurement there is no hidden value: there is a state.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="cards" style="margin-top:56px;">
+
+          <article class="card card-half reveal">
+            <span class="card-index">01 / QUBIT</span>
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/>
+                <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(-30 12 12)"/>
+                <ellipse cx="12" cy="12" rx="9" ry="4" transform="rotate(30 12 12)"/>
+              </svg>
+            </div>
+            <h3><span class="lang-pt">Qubit</span><span class="lang-en">Qubit</span></h3>
+            <p>
+              <span class="lang-pt">O bit clássico é 0 ou 1. O qubit é descrito por uma combinação dos dois até ser medido. Não é “os dois ao mesmo tempo” no sentido cotidiano: é uma amplitude complexa que pode interferir consigo mesma.</span>
+              <span class="lang-en">A classical bit is 0 or 1. A qubit is described by a combination of both until it is measured. It is not “both at once” in the everyday sense: it is a complex amplitude that can interfere with itself.</span>
+            </p>
+          </article>
+
+          <article class="card card-half reveal">
+            <span class="card-index">02 / ENTANGLEMENT</span>
+            <div class="card-icon cyan" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                <circle cx="8" cy="9" r="3.4"/>
+                <circle cx="16" cy="15" r="3.4"/>
+                <path d="M10.6 11.4 13.4 12.6"/>
+              </svg>
+            </div>
+            <h3><span class="lang-pt">Emaranhamento</span><span class="lang-en">Entanglement</span></h3>
+            <p>
+              <span class="lang-pt">Dois qubits podem formar um estado conjunto que não pode ser descrito separadamente. Medir um determina o resultado do outro — mas isso não transmite informação mais rápido que a luz.</span>
+              <span class="lang-en">Two qubits can form a joint state that cannot be described separately. Measuring one determines the other's result — but that does not transmit information faster than light.</span>
+            </p>
+          </article>
+
+          <article class="card card-half reveal">
+            <span class="card-index">03 / INTERFERENCE</span>
+            <div class="card-icon pink" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                <path d="M2 12c2.5-6 5-6 7.5 0s5 6 7.5 0 3.5-3 5-1.5"/>
+                <path d="M2 17c2.5-3 5-3 7.5 0s5 3 7.5 0 3.5-1.5 5-.8" opacity=".45"/>
+              </svg>
+            </div>
+            <h3><span class="lang-pt">Interferência</span><span class="lang-en">Interference</span></h3>
+            <p>
+              <span class="lang-pt">Amplitudes se somam e se cancelam. É o mecanismo que permite a um algoritmo amplificar as respostas certas e apagar as erradas. Sem interferência, superposição não serve para nada.</span>
+              <span class="lang-en">Amplitudes add and cancel. This is the mechanism that lets an algorithm amplify right answers and erase wrong ones. Without interference, superposition is useless.</span>
+            </p>
+          </article>
+
+          <article class="card card-half reveal">
+            <span class="card-index">04 / MEASUREMENT</span>
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                <path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z"/>
+                <circle cx="12" cy="12" r="2.6"/>
+              </svg>
+            </div>
+            <h3><span class="lang-pt">Medição</span><span class="lang-en">Measurement</span></h3>
+            <p>
+              <span class="lang-pt">Medir colapsa o estado e devolve um único resultado. O algoritmo precisa ser desenhado para que a resposta útil tenha alta probabilidade — e normalmente é executado muitas vezes para estimar essa distribuição.</span>
+              <span class="lang-en">Measuring collapses the state and returns a single result. The algorithm must be designed so the useful answer has high probability — and it is usually run many times to estimate that distribution.</span>
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LIMITES ================= -->
+    <section class="section" id="limites">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker"><span>02</span> <span class="lang-pt">O que trava a área</span><span class="lang-en">What holds the field back</span></p>
+          <h2>
+            <span class="lang-pt">O problema não é fazer um qubit. É fazer milhões deles cooperarem.</span>
+            <span class="lang-en">The problem is not making one qubit. It is making millions of them cooperate.</span>
+          </h2>
+          <p>
+            <span class="lang-pt">Cada qubit precisa ser isolado do ambiente, controlado com precisão e corrigido em tempo real. Essas três exigências competem entre si.</span>
+            <span class="lang-en">Each qubit must be isolated from the environment, controlled precisely and corrected in real time. These three requirements compete with one another.</span>
+          </p>
+        </div>
+
+        <div class="difficulties reveal">
+          <div class="difficulty">
+            <span class="num">01</span>
+            <h3><span class="lang-pt">Decoerência</span><span class="lang-en">Decoherence</span></h3>
+            <p>
+              <span class="lang-pt">Qualquer interação com o ambiente apaga a informação quântica. Por isso os dispositivos ficam em refrigeradores de diluição, com temperaturas da ordem de 10 mK — mais frios que o espaço aberto.</span>
+              <span class="lang-en">Any interaction with the environment erases quantum information. That is why devices sit in dilution refrigerators at temperatures on the order of 10 mK — colder than open space.</span>
+            </p>
+          </div>
+          <div class="difficulty">
+            <span class="num">02</span>
+            <h3><span class="lang-pt">Ruído e portas imperfeitas</span><span class="lang-en">Noise and imperfect gates</span></h3>
+            <p>
+              <span class="lang-pt">Nenhuma operação é perfeita. Cada porta quântica introduz erro, e os erros se acumulam ao longo de um circuito. Reduzir essa taxa é metade da engenharia.</span>
+              <span class="lang-en">No operation is perfect. Every quantum gate introduces error, and errors accumulate along a circuit. Lowering that rate is half of the engineering.</span>
+            </p>
+          </div>
+          <div class="difficulty">
+            <span class="num">03</span>
+            <h3><span class="lang-pt">Correção de erros</span><span class="lang-en">Error correction</span></h3>
+            <p>
+              <span class="lang-pt">Um qubit lógico — o que realmente calcula — exige muitos qubits físicos de reserva. Códigos de superfície funcionam, mas o custo por qubit lógico ainda é alto demais para aplicações gerais.</span>
+              <span class="lang-en">One logical qubit — the one that actually computes — requires many physical qubits in reserve. Surface codes work, but the cost per logical qubit is still too high for general applications.</span>
+            </p>
+          </div>
+          <div class="difficulty">
+            <span class="num">04</span>
+            <h3><span class="lang-pt">Escala e engenharia</span><span class="lang-en">Scale and engineering</span></h3>
+            <p>
+              <span class="lang-pt">Fiação, eletrônica de controle, criogenia e calibração não escalam linearmente. Ligar milhares de qubits já é difícil; milhões é um problema de sistema, não só de física.</span>
+              <span class="lang-en">Wiring, control electronics, cryogenics and calibration do not scale linearly. Wiring thousands of qubits is already hard; millions is a systems problem, not only a physics one.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= APLICAÇÕES ================= -->
+    <section class="section" id="aplicacoes">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker"><span>03</span> <span class="lang-pt">Onde o ganho é real</span><span class="lang-en">Where the gain is real</span></p>
+          <h2>
+            <span class="lang-pt">Poucos problemas, ganhos muito diferentes.</span>
+            <span class="lang-en">Few problems, very different gains.</span>
+          </h2>
+          <p>
+            <span class="lang-pt">“Aceleração quântica” não é uma propriedade geral. Cada algoritmo tem uma promessa própria — e algumas continuam sem prova de vantagem prática.</span>
+            <span class="lang-en">“Quantum speedup” is not a general property. Each algorithm carries its own promise — and some still lack proof of practical advantage.</span>
+          </p>
+        </div>
+
+        <div class="table-wrap reveal">
+          <table>
+            <caption>
+              <span class="lang-pt">Panorama qualitativo. Nenhum prazo é consenso na área.</span>
+              <span class="lang-en">Qualitative overview. No timeline is a consensus in the field.</span>
+            </caption>
+            <thead>
+              <tr>
+                <th><span class="lang-pt">Aplicação</span><span class="lang-en">Application</span></th>
+                <th><span class="lang-pt">Ganho teórico</span><span class="lang-en">Theoretical gain</span></th>
+                <th><span class="lang-pt">Status</span><span class="lang-en">Status</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="lang-pt">Simulação de moléculas e materiais</span><span class="lang-en">Molecular and materials simulation</span></td>
+                <td><span class="lang-pt">Exponencial em certos sistemas</span><span class="lang-en">Exponential on certain systems</span></td>
+                <td><span class="tag warn"><span class="lang-pt">Mais promissor</span><span class="lang-en">Most promising</span></span></td>
+              </tr>
+              <tr>
+                <td><span class="lang-pt">Fatoração de inteiros (Shor)</span><span class="lang-en">Integer factoring (Shor)</span></td>
+                <td><span class="lang-pt">Exponencial</span><span class="lang-en">Exponential</span></td>
+                <td><span class="tag no"><span class="lang-pt">Sem máquina em escala</span><span class="lang-en">No machine at scale</span></span></td>
+              </tr>
+              <tr>
+                <td><span class="lang-pt">Busca não estruturada (Grover)</span><span class="lang-en">Unstructured search (Grover)</span></td>
+                <td><span class="lang-pt">Quadrático</span><span class="lang-en">Quadratic</span></td>
+                <td><span class="tag warn"><span class="lang-pt">Útil, mas modesto</span><span class="lang-en">Useful, but modest</span></span></td>
+              </tr>
+              <tr>
+                <td><span class="lang-pt">Otimização combinatória</span><span class="lang-en">Combinatorial optimization</span></td>
+                <td><span class="lang-pt">Incerto, depende do problema</span><span class="lang-en">Uncertain, problem-dependent</span></td>
+                <td><span class="tag no"><span class="lang-pt">Não garantido</span><span class="lang-en">Not guaranteed</span></span></td>
+              </tr>
+              <tr>
+                <td><span class="lang-pt">Aprendizado de máquina quântico</span><span class="lang-en">Quantum machine learning</span></td>
+                <td><span class="lang-pt">Sem vantagem comprovada</span><span class="lang-en">No proven advantage</span></td>
+                <td><span class="tag no"><span class="lang-pt">Especulativo</span><span class="lang-en">Speculative</span></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="reveal" style="margin-top:22px;font-size:.88rem;max-width:80ch;">
+          <span class="lang-pt">Ganho exponencial não significa “exponencialmente mais rápido em tudo”. Significa que, para uma classe específica de problema, o custo cresce mais devagar com o tamanho da entrada — se a máquina existir e se a correção de erros funcionar.</span>
+          <span class="lang-en">Exponential gain does not mean “exponentially faster at everything”. It means that, for a specific class of problem, cost grows more slowly with input size — if the machine exists and if error correction works.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ================= HISTÓRIA ================= -->
+    <section class="section" id="historia">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker"><span>04</span> <span class="lang-pt">Linha do tempo</span><span class="lang-en">Timeline</span></p>
+          <h2>
+            <span class="lang-pt">Quarenta anos entre a ideia e a engenharia.</span>
+            <span class="lang-en">Forty years between the idea and the engineering.</span>
+          </h2>
+        </div>
+
+        <div class="timeline reveal">
+          <div class="tl-item">
+            <div class="tl-year">1982</div>
+            <div class="tl-body">
+              <h3><span class="lang-pt">Feynman propõe simular física com sistemas quânticos</span><span class="lang-en">Feynman proposes simulating physics with quantum systems</span></h3>
+              <p><span class="lang-pt">A observação central: certos sistemas quânticos são caros demais de simular em hardware clássico.</span><span class="lang-en">The central observation: certain quantum systems are too expensive to simulate on classical hardware.</span></p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1985</div>
+            <div class="tl-body">
+              <h3><span class="lang-pt">Deutsch descreve um computador quântico universal</span><span class="lang-en">Deutsch describes a universal quantum computer</span></h3>
+              <p><span class="lang-pt">O modelo teórico ganha forma: portas, circuitos e uma noção de universalidade.</span><span class="lang-en">The theoretical model takes shape: gates, circuits and a notion of universality.</span></p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1994</div>
+            <div class="tl-body">
+              <h3><span class="lang-pt">Shor apresenta o algoritmo de fatoração</span><span class="lang-en">Shor presents the factoring algorithm</span></h3>
+              <p><span class="lang-pt">O resultado que colocou a criptografia RSA no radar da área — e transformou o tema em política pública.</span><span class="lang-en">The result that put RSA encryption on the field's radar — and turned the topic into public policy.</span></p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1995</div>
+            <div class="tl-body">
+              <h3><span class="lang-pt">Primeiros códigos corretores de erro quânticos</span><span class="lang-en">First quantum error-correcting codes</span></h3>
+              <p><span class="lang-pt">Shor mostra que é possível proteger informação quântica sem copiá-la — algo proibido pelo teorema da não clonagem.</span><span class="lang-en">Shor shows that quantum information can be protected without copying it — something forbidden by the no-cloning theorem.</span></p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">1996</div>
+            <div class="tl-body">
+              <h3><span class="lang-pt">Grover apresenta a busca quadrática</span><span class="lang-en">Grover presents quadratic search</span></h3>
+              <p><span class="lang-pt">Uma aceleração menor, porém aplicável a uma classe ampla de problemas.</span><span class="lang-en">A smaller speedup, but applicable to a broad class of problems.</span></p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2019</div>
+            <div class="tl-body">
+              <h3><span class="lang-pt">Vantagem quântica em uma tarefa específica</span><span class="lang-en">Quantum advantage on a specific task</span></h3>
+              <p><span class="lang-pt">Um processador supercondutor resolve uma amostragem aleatória de circuitos mais rápido que um supercomputador. A tarefa não tem uso prático direto.</span><span class="lang-en">A superconducting processor solves random circuit sampling faster than a supercomputer. The task has no direct practical use.</span></p>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2024</div>
+            <div class="tl-body">
+              <h3><span class="lang-pt">Correção de erros abaixo do limiar</span><span class="lang-en">Error correction below threshold</span></h3>
+              <p><span class="lang-pt">Um código de superfície passa a reduzir erros conforme cresce — a condição necessária para qubits lógicos confiáveis.</span><span class="lang-en">A surface code starts reducing errors as it grows — the necessary condition for reliable logical qubits.</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= MITOS ================= -->
+    <section class="section" id="mitos">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker"><span>05</span> <span class="lang-pt">Mitos e fatos</span><span class="lang-en">Myths and facts</span></p>
+          <h2>
+            <span class="lang-pt">O que a imprensa repete e a física não sustenta.</span>
+            <span class="lang-en">What the press repeats and physics does not support.</span>
+          </h2>
+        </div>
+
+        <div class="cards">
+          <div class="card card-half myth reveal">
+            <span class="myth-label mito"><span class="lang-pt">Mito</span><span class="lang-en">Myth</span></span>
+            <p class="claim"><span class="lang-pt">“Computador quântico resolve qualquer problema mais rápido.”</span><span class="lang-en">“A quantum computer solves any problem faster.”</span></p>
+            <span class="myth-label fato"><span class="lang-pt">Fato</span><span class="lang-en">Fact</span></span>
+            <p><span class="lang-pt">O ganho depende do algoritmo. Para a maioria dos problemas não se conhece vantagem; em vários, o computador quântico seria mais lento.</span><span class="lang-en">The gain depends on the algorithm. For most problems no advantage is known; on several, a quantum computer would be slower.</span></p>
+          </div>
+
+          <div class="card card-half myth reveal">
+            <span class="myth-label mito"><span class="lang-pt">Mito</span><span class="lang-en">Myth</span></span>
+            <p class="claim"><span class="lang-pt">“Ele testa todas as possibilidades ao mesmo tempo.”</span><span class="lang-en">“It tries all possibilities at once.”</span></p>
+            <span class="myth-label fato"><span class="lang-pt">Fato</span><span class="lang-en">Fact</span></span>
+            <p><span class="lang-pt">Superposição não é paralelismo massivo. A medição devolve uma resposta; o ganho vem da interferência, que exige um algoritmo desenhado para o problema.</span><span class="lang-en">Superposition is not massive parallelism. Measurement returns one answer; the gain comes from interference, which requires an algorithm designed for the problem.</span></p>
+          </div>
+
+          <div class="card card-half myth reveal">
+            <span class="myth-label mito"><span class="lang-pt">Mito</span><span class="lang-en">Myth</span></span>
+            <p class="claim"><span class="lang-pt">“Vai substituir os computadores clássicos.”</span><span class="lang-en">“It will replace classical computers.”</span></p>
+            <span class="myth-label fato"><span class="lang-pt">Fato</span><span class="lang-en">Fact</span></span>
+            <p><span class="lang-pt">O modelo realista é híbrido: o quântico atua como coprocessador para sub-rotinas específicas, dentro de um sistema clássico que controla, lê e corrige.</span><span class="lang-en">The realistic model is hybrid: the quantum device acts as a coprocessor for specific subroutines, inside a classical system that controls, reads and corrects.</span></p>
+          </div>
+
+          <div class="card card-half myth reveal">
+            <span class="myth-label mito"><span class="lang-pt">Mito</span><span class="lang-en">Myth</span></span>
+            <p class="claim"><span class="lang-pt">“Emaranhamento permite comunicação instantânea.”</span><span class="lang-en">“Entanglement allows instant communication.”</span></p>
+            <span class="myth-label fato"><span class="lang-pt">Fato</span><span class="lang-en">Fact</span></span>
+            <p><span class="lang-pt">As correlações não transmitem informação. Sem um canal clássico para comparar resultados, não há mensagem — é o que o teorema da não comunicação garante.</span><span class="lang-en">Correlations do not transmit information. Without a classical channel to compare results, there is no message — as the no-communication theorem guarantees.</span></p>
+          </div>
+
+          <div class="card card-half myth reveal">
+            <span class="myth-label mito"><span class="lang-pt">Mito</span><span class="lang-en">Myth</span></span>
+            <p class="claim"><span class="lang-pt">“Já existe computador quântico útil comercialmente.”</span><span class="lang-en">“A commercially useful quantum computer already exists.”</span></p>
+            <span class="myth-label fato"><span class="lang-pt">Fato</span><span class="lang-en">Fact</span></span>
+            <p><span class="lang-pt">Existem máquinas reais e acesso por nuvem, mas ainda sem vantagem prática comprovada em problemas de interesse geral. A vantagem demonstrada é em tarefas artificiais.</span><span class="lang-en">Real machines and cloud access exist, but still without proven practical advantage on problems of general interest. Demonstrated advantage is on artificial tasks.</span></p>
+          </div>
+
+          <div class="card card-half myth reveal">
+            <span class="myth-label mito"><span class="lang-pt">Mito</span><span class="lang-en">Myth</span></span>
+            <p class="claim"><span class="lang-pt">“Qubit é só um bit que vale 0 e 1 ao mesmo tempo.”</span><span class="lang-en">“A qubit is just a bit that is 0 and 1 at the same time.”</span></p>
+            <span class="myth-label fato"><span class="lang-pt">Fato</span><span class="lang-en">Fact</span></span>
+            <p><span class="lang-pt">O estado é uma amplitude complexa com fase. A simplificação “0 e 1 ao mesmo tempo” esconde justamente a fase — e é da fase que vem o poder da interferência.</span><span class="lang-en">The state is a complex amplitude with a phase. The “0 and 1 at once” simplification hides the phase — and the power of interference comes from phase.</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= GLOSSÁRIO ================= -->
+    <section class="section" id="glossario">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker"><span>06</span> <span class="lang-pt">Glossário</span><span class="lang-en">Glossary</span></p>
+          <h2>
+            <span class="lang-pt">Vocabulário mínimo para não se perder.</span>
+            <span class="lang-en">Minimum vocabulary so you don't get lost.</span>
+          </h2>
+        </div>
+
+        <div class="glossary reveal">
+          <details>
+            <summary><span><span class="lang-pt">Qubit</span><span class="lang-en">Qubit</span> <span class="g-term">qubit</span></span></summary>
+            <div class="g-body"><p><span class="lang-pt">Unidade básica de informação quântica. Diferente do bit, não armazena um valor definido antes da medição: armazena um estado.</span><span class="lang-en">Basic unit of quantum information. Unlike a bit, it does not store a definite value before measurement: it stores a state.</span></p></div>
+          </details>
+          <details>
+            <summary><span><span class="lang-pt">Superposição</span><span class="lang-en">Superposition</span> <span class="g-term">superposition</span></span></summary>
+            <div class="g-body"><p><span class="lang-pt">Combinação linear de estados com amplitudes complexas. Não é “estar em dois lugares”; é descrever probabilidades e fases que interferem.</span><span class="lang-en">Linear combination of states with complex amplitudes. It is not “being in two places”; it describes probabilities and phases that interfere.</span></p></div>
+          </details>
+          <details>
+            <summary><span><span class="lang-pt">Emaranhamento</span><span class="lang-en">Entanglement</span> <span class="g-term">entanglement</span></span></summary>
+            <div class="g-body"><p><span class="lang-pt">Correlação quântica entre sistemas que não pode ser explicada por estados individuais. Não permite sinalização mais rápida que a luz.</span><span class="lang-en">Quantum correlation between systems that cannot be explained by individual states. It does not allow faster-than-light signaling.</span></p></div>
+          </details>
+          <details>
+            <summary><span><span class="lang-pt">Interferência</span><span class="lang-en">Interference</span> <span class="g-term">interference</span></span></summary>
+            <div class="g-body"><p><span class="lang-pt">Soma e cancelamento de amplitudes. É o recurso computacional que transforma superposição em vantagem algorítmica.</span><span class="lang-en">Addition and cancellation of amplitudes. It is the computational resource that turns superposition into algorithmic advantage.</span></p></div>
+          </details>
+          <details>
+            <summary><span><span class="lang-pt">Decoerência</span><span class="lang-en">Decoherence</span> <span class="g-term">decoherence</span></span></summary>
+            <div class="g-body"><p><span class="lang-pt">Perda da informação quântica para o ambiente. É o principal inimigo prático de qualquer dispositivo.</span><span class="lang-en">Loss of quantum information to the environment. It is the main practical enemy of any device.</span></p></div>
+          </details>
+          <details>
+            <summary><span><span class="lang-pt">Porta quântica</span><span class="lang-en">Quantum gate</span> <span class="g-term">gate</span></span></summary>
+            <div class="g-body"><p><span class="lang-pt">Operação unitária sobre um ou mais qubits. O análogo quântico das portas lógicas clássicas, mas reversível.</span><span class="lang-en">Unitary operation on one or more qubits. The quantum analogue of classical logic gates, but reversible.</span></p></div>
+          </details>
+          <details>
+            <summary><span><span class="lang-pt">Circuito quântico</span><span class="lang-en">Quantum circuit</span> <span class="g-term">circuit</span></span></summary>
+            <div class="g-body"><p><span class="lang-pt">Sequência de portas e medições executada sobre um conjunto de qubits. É o modelo de programação mais comum.</span><span class="lang-en">Sequence of gates and measurements executed on a set of qubits. It is the most common programming model.</span></p></div>
+          </details>
+          <details>
+            <summary><span><span class="lang-pt">Qubit lógico</span><span class="lang-en">Logical qubit</span> <span class="g-term">logical qubit</span></span></summary>
+            <div class="g-body"><p><span class="lang-pt">Qubit protegido por correção de erros, construído a partir de muitos qubits físicos. É a unidade que importa para computação confiável.</span><span class="lang-en">Error-corrected qubit built from many physical qubits. It is the unit that matters for reliable computation.</span></p></div>
+          </details>
+          <details>
+            <summary><span><span class="lang-pt">NISQ</span><span class="lang-en">NISQ</span> <span class="g-term">noisy intermediate-scale quantum</span></span></summary>
+            <div class="g-body"><p><span class="lang-pt">Era atual: dispositivos com dezenas a alguns milhares de qubits físicos, ruidosos e sem correção de erros completa.</span><span class="lang-en">The current era: devices with tens to a few thousand physical qubits, noisy and without full error correction.</span></p></div>
+          </details>
+          <details>
+            <summary><span><span class="lang-pt">Limiar de correção</span><span class="lang-en">Error threshold</span> <span class="g-term">threshold</span></span></summary>
+            <div class="g-body"><p><span class="lang-pt">Taxa de erro abaixo da qual adicionar qubits físicos reduz o erro lógico. Acima dela, corrigir piora o problema.</span><span class="lang-en">Error rate below which adding physical qubits reduces logical error. Above it, correcting makes the problem worse.</span></p></div>
+          </details>
+          <details>
+            <summary><span><span class="lang-pt">Vantagem quântica</span><span class="lang-en">Quantum advantage</span> <span class="g-term">quantum advantage</span></span></summary>
+            <div class="g-body"><p><span class="lang-pt">Demonstração de que um dispositivo quântico resolve uma tarefa específica mais rápido que o melhor método clássico conhecido. Não implica utilidade prática.</span><span class="lang-en">Demonstration that a quantum device solves a specific task faster than the best known classical method. It does not imply practical usefulness.</span></p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LEITURAS ================= -->
+    <section class="section" id="leituras">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <p class="kicker"><span>07</span> <span class="lang-pt">Para continuar</span><span class="lang-en">Keep going</span></p>
+          <h2>
+            <span class="lang-pt">Fontes que valem o tempo.</span>
+            <span class="lang-en">Sources worth your time.</span>
+          </h2>
+          <p>
+            <span class="lang-pt">Material introdutório e técnico, de instituições e grupos de pesquisa. Nenhum link é patrocinado.</span>
+            <span class="lang-en">Introductory and technical material from institutions and research groups. No link is sponsored.</span>
+          </p>
+        </div>
+
+        <div class="readings reveal">
+          <a class="reading" href="https://learning.quantum.ibm.com" target="_blank" rel="noopener noreferrer">
+            <strong>IBM Quantum Learning</strong>
+            <span><span class="lang-pt">Cursos e tutoriais com Qiskit</span><span class="lang-en">Courses and tutorials with Qiskit</span></span>
+            <span class="arrow">learning.quantum.ibm.com ↗</span>
+          </a>
+          <a class="reading" href="https://qutech.nl" target="_blank" rel="noopener noreferrer">
+            <strong>QuTech</strong>
+            <span><span class="lang-pt">Instituto de Delft: pesquisa e engenharia quântica</span><span class="lang-en">Delft institute: quantum research and engineering</span></span>
+            <span class="arrow">qutech.nl ↗</span>
+          </a>
+          <a class="reading" href="https://quantum.country" target="_blank" rel="noopener noreferrer">
+            <strong>Quantum Country</strong>
+            <span><span class="lang-pt">Introdução com repetição espaçada</span><span class="lang-en">Introduction with spaced repetition</span></span>
+            <span class="arrow">quantum.country ↗</span>
+          </a>
+          <a class="reading" href="https://arxiv.org/abs/1801.00862" target="_blank" rel="noopener noreferrer">
+            <strong>Preskill — NISQ era and beyond</strong>
+            <span><span class="lang-pt">O texto que nomeou a era atual</span><span class="lang-en">The paper that named the current era</span></span>
+            <span class="arrow">arxiv.org ↗</span>
+          </a>
+          <a class="reading" href="https://www.nature.com/npjqi" target="_blank" rel="noopener noreferrer">
+            <strong>npj Quantum Information</strong>
+            <span><span class="lang-pt">Periódico aberto da Nature</span><span class="lang-en">Open-access Nature journal</span></span>
+            <span class="arrow">nature.com/npjqi ↗</span>
+          </a>
+          <a class="reading" href="https://arxiv.org/archive/quant-ph" target="_blank" rel="noopener noreferrer">
+            <strong>arXiv quant-ph</strong>
+            <span><span class="lang-pt">Preprints de física quântica</span><span class="lang-en">Quantum physics preprints</span></span>
+            <span class="arrow">arxiv.org/archive/quant-ph ↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="#inicio">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+                <circle cx="12" cy="12" r="3.2" fill="currentColor" stroke="none"/>
+                <ellipse cx="12" cy="12" rx="9" ry="3.8" transform="rotate(-28 12 12)"/>
+                <ellipse cx="12" cy="12" rx="9" ry="3.8" transform="rotate(38 12 12)"/>
+              </svg>
+            </span>
+            <span>babybaby<small>quantum notes</small></span>
+          </a>
+          <p>
+            <span class="lang-pt">Conteúdo educacional independente sobre computação quântica. Sem afiliação com fabricantes.</span>
+            <span class="lang-en">Independent educational content on quantum computing. Not affiliated with any vendor.</span>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4><span class="lang-pt">Navegar</span><span class="lang-en">Browse</span></h4>
+          <a href="#conceitos"><span class="lang-pt">Conceitos</span><span class="lang-en">Concepts</span></a>
+          <a href="#limites"><span class="lang-pt">Limites</span><span class="lang-en">Limits</span></a>
+          <a href="#aplicacoes"><span class="lang-pt">Aplicações</span><span class="lang-en">Applications</span></a>
+          <a href="#mitos"><span class="lang-pt">Mitos</span><span class="lang-en">Myths</span></a>
+        </div>
+
+        <div class="footer-col">
+          <h4><span class="lang-pt">Referência</span><span class="lang-en">Reference</span></h4>
+          <a href="#glossario"><span class="lang-pt">Glossário</span><span class="lang-en">Glossary</span></a>
+          <a href="#leituras"><span class="lang-pt">Leituras</span><span class="lang-en">Readings</span></a>
+          <a href="#historia"><span class="lang-pt">Linha do tempo</span><span class="lang-en">Timeline</span></a>
+        </div>
+
+        <div class="footer-col">
+          <h4><span class="lang-pt">Projeto</span><span class="lang-en">Project</span></h4>
+          <a href="https://github.com/tecnologiaquantica/babybaby" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <span><span class="lang-pt">Reconstruído em 2026</span><span class="lang-en">Rebuilt in 2026</span></span>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 tecnologiaquantica</span>
+        <span>HTML · CSS · JS · GitHub Pages</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
