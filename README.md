@@ -75,6 +75,10 @@ O repositório publica a branch `master`, na raiz, sem ação de build.
 
 O arquivo `.nojekyll` evita que o Jekyll ignore pastas iniciadas por `_`.
 
+Os caminhos absolutos em `404.html`, `canonical` e `og:image` incluem
+`/QuanicDreams/`. Se o repositório for renomeado, atualize esses três pontos
+e o link do rodapé.
+
 ## Editar
 
 - **Cores e tipografia:** variáveis no topo de `assets/css/style.css`.
