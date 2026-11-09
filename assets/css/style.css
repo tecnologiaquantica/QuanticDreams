@@ -1,5 +1,5 @@
 /* =========================================================
-   babybaby — quantum computing, without the mysticism
+   quanticdreams — quantum computing, without the mysticism
    Pure CSS. No frameworks, no external requests.
    ========================================================= */
 
@@ -1302,7 +1302,8 @@ td:first-child {
   }
 
   .brand {
-    font-size: 0.74rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.08em;
     gap: 9px;
   }
 

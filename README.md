@@ -1,10 +1,13 @@
-# babybaby
+# quanticdreams
 
 Site de divulgação científica sobre computação quântica, em português e inglês.
 Estático, sem build e sem dependências externas.
 
 **Endereço:** https://tecnologiaquantica.github.io/babybaby/ — ative em
 Settings → Pages → *Deploy from a branch* (`master`, `/ (root)`).
+
+O repositório ainda se chama `babybaby`; o nome público do projeto é
+**quanticdreams**. Renomear o repositório exige acesso de administrador no GitHub.
 
 ## Estrutura
 
@@ -38,7 +41,7 @@ html[data-lang="en"] .lang-pt { display: none !important; }
 ```
 
 O botão no cabeçalho troca `data-lang` e guarda a escolha em `localStorage`
-(chave `babybaby:lang`). Sem JavaScript, a página abre em português.
+(chave `quanticdreams:lang`). Sem JavaScript, a página abre em português.
 
 Para adicionar conteúdo, escreva os dois blocos e use a mesma classe. Nunca
 deixe um idioma sem par: o layout reserva o espaço do texto traduzido.
@@ -62,7 +65,8 @@ O repositório publica a branch `master`, na raiz, sem ação de build.
 
 1. Settings → Pages → Source: *Deploy from a branch*.
 2. Branch: `master`, pasta `/ (root)`.
-3. Salvar. O endereço fica `https://<org>.github.io/babybaby/`.
+3. Salvar. O endereço fica `https://<org>.github.io/babybaby/` enquanto o
+   repositório mantiver esse nome.
 
 O arquivo `.nojekyll` evita que o Jekyll ignore pastas iniciadas por `_`.
 

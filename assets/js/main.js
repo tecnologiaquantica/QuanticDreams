@@ -1,5 +1,5 @@
 /* =========================================================
-   babybaby — main.js
+   quanticdreams — main.js
    Language switch, navigation, canvas field, reveal effects.
    No dependencies.
    ========================================================= */
@@ -12,7 +12,7 @@
 
   /* ---------------- language ---------------- */
 
-  var STORAGE_KEY = "babybaby:lang";
+  var STORAGE_KEY = "quanticdreams:lang";
   var toggle = document.getElementById("lang-toggle");
   var label = document.getElementById("lang-label");
 
@@ -46,7 +46,7 @@
     }
 
     document.dispatchEvent(
-      new CustomEvent("babybaby:lang", { detail: { lang: l } })
+      new CustomEvent("quanticdreams:lang", { detail: { lang: l } })
     );
   }
 
